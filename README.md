@@ -1,4 +1,4 @@
-# TaskFlow
+# Task Flow App
 
 TaskFlow is a **simple yet powerful task management app** built with **Clean Architecture** and **Jetpack Compose**.  
 It helps you stay organized by allowing you to add, filter, prioritize, and track your tasks efficiently.
