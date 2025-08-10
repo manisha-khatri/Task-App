@@ -6,8 +6,8 @@ import com.example.taskapp.domain.model.Task
 import com.example.taskapp.domain.usecase.AddTaskUseCase
 import com.example.taskapp.domain.usecase.DeleteAllTasksUseCase
 import com.example.taskapp.domain.usecase.GetTasksUseCase
-import com.example.taskapp.util.Priority
-import com.example.taskapp.util.TaskStatus
+import com.example.taskapp.domain.model.Priority
+import com.example.taskapp.domain.model.TaskStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,8 +16,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject

@@ -1,7 +1,7 @@
 package com.example.taskapp.presentation
 
 import com.example.taskapp.domain.model.Task
-import com.example.taskapp.util.Priority
+import com.example.taskapp.domain.model.Priority
 
 /**
  * Data class to hold all the UI state for the TaskScreen.

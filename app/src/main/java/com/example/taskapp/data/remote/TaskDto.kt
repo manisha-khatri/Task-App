@@ -1,7 +1,7 @@
 package com.example.taskapp.data.remote
 
-import com.example.taskapp.util.Priority
-import com.example.taskapp.util.TaskStatus
+import com.example.taskapp.domain.model.Priority
+import com.example.taskapp.domain.model.TaskStatus
 
 data class TaskDto(
     val id: Long,

@@ -2,8 +2,8 @@ package com.example.taskapp.data.local
 
 
 import androidx.room.TypeConverter
-import com.example.taskapp.util.Priority
-import com.example.taskapp.util.TaskStatus
+import com.example.taskapp.domain.model.Priority
+import com.example.taskapp.domain.model.TaskStatus
 
 class TaskConverters {
 

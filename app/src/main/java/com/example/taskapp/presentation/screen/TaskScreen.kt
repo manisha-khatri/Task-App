@@ -8,7 +8,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.taskapp.domain.model.Task
 import com.example.taskapp.presentation.TaskUiState
-import com.example.taskapp.util.Priority
+import com.example.taskapp.presentation.screen.sections.AddTaskSection
+import com.example.taskapp.presentation.screen.sections.TaskFilterTabs
+import com.example.taskapp.presentation.screen.sections.TaskList
+import com.example.taskapp.presentation.screen.sections.TaskScreenTopBar
+import com.example.taskapp.domain.model.Priority
 
 @Composable
 fun TaskScreen(

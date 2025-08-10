@@ -1,4 +1,4 @@
-package com.example.taskapp.presentation.screen
+package com.example.taskapp.presentation.screen.sections
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.taskapp.util.TaskStatus
+import com.example.taskapp.domain.model.TaskStatus
 
 // Composable for the status indicator
 @Composable

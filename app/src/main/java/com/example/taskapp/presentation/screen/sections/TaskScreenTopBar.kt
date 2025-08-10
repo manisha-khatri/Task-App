@@ -1,4 +1,4 @@
-package com.example.taskapp.presentation.screen
+package com.example.taskapp.presentation.screen.sections
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

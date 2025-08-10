@@ -1,4 +1,4 @@
-package com.example.taskapp.presentation.screen
+package com.example.taskapp.presentation.screen.sections
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.taskapp.util.Priority
+import com.example.taskapp.domain.model.Priority
 
 
 // Composable for the priority tag

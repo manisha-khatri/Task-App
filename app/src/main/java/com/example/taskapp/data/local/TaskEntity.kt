@@ -2,8 +2,8 @@ package com.example.taskapp.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.taskapp.util.Priority
-import com.example.taskapp.util.TaskStatus
+import com.example.taskapp.domain.model.Priority
+import com.example.taskapp.domain.model.TaskStatus
 
 @Entity(tableName = "task")
 data class TaskEntity(

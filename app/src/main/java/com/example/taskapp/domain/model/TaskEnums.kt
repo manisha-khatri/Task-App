@@ -1,4 +1,4 @@
-package com.example.taskapp.util
+package com.example.taskapp.domain.model
 
 // Enum for task status
 enum class TaskStatus {
