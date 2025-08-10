@@ -10,6 +10,10 @@ It helps you stay organized by allowing you to add, filter, prioritize, and trac
 ![🎥 Watch TaskFlow Demo](screenshots/taskflow.gif)
 
 
+https://github.com/user-attachments/assets/04599dad-7410-407f-a836-cbb67b242b16
+
+
+
 ---
 
 ## ✨ Features
