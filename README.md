@@ -7,10 +7,7 @@ It helps you stay organized by allowing you to add, filter, prioritize, and trac
   <img src="screenshots/taskflow_ui.png" alt="TaskFlow Screenshot" width="300"/>
 </p>
 
-[🎥 Watch Demo]
-<video src="screenshots/taskflow.mp4" width="400" controls>
-  Your browser does not support the video tag.
-</video>
+![🎥 Watch TaskFlow Demo](screenshots/taskflow.gif)
 
 
 ---
