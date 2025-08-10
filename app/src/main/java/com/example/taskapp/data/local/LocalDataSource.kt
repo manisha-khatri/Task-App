@@ -14,8 +14,10 @@ class LocalDataSource @Inject constructor(private val taskDao: TaskDao) {
         }
 
     suspend fun saveTaskOffline(task: Task) =
-        taskDao.saveTask(task.toEntity())
+        taskDao.insertTask(task.toEntity())
 
     suspend fun saveAllTasksOffline(tasks: List<Task>) =
         taskDao.saveAllTasks(tasks.map { it.toEntity() })
+
+    suspend fun deleteAllTasks() = taskDao.deleteAllTasks()
 }

@@ -7,7 +7,7 @@ import com.example.taskapp.util.TaskStatus
 
 @Entity(tableName = "task")
 data class TaskEntity(
-    @PrimaryKey val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
     val date: String,
     val status: TaskStatus,

@@ -10,6 +10,7 @@ import com.example.taskapp.data.remote.RemoteDataSource
 import com.example.taskapp.data.repository.TaskRepositoryImpl
 import com.example.taskapp.domain.repository.TaskRepository
 import com.example.taskapp.domain.usecase.AddTaskUseCase
+import com.example.taskapp.domain.usecase.DeleteAllTasksUseCase
 import com.example.taskapp.domain.usecase.GetTasksUseCase
 import com.example.taskapp.util.Constants
 import dagger.Module
@@ -39,7 +40,9 @@ object AppModule {
             context,
             TaskDatabase::class.java,
             "task_database"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
@@ -84,6 +87,11 @@ object AppModule {
     @Provides
     fun providesTaskRepository(local: LocalDataSource, remote: RemoteDataSource): TaskRepository {
         return TaskRepositoryImpl(local, remote)
+    }
+
+    @Provides
+    fun providesDeleteAllTasksUseCase(repo: TaskRepository): DeleteAllTasksUseCase {
+        return DeleteAllTasksUseCase(repo)
     }
 
 }

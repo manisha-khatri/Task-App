@@ -25,6 +25,7 @@ import com.example.taskapp.presentation.TaskViewModel
         onAddTask = viewModel::onAddTask,
         onFilterSelected = viewModel::onFilterSelected,
         onTaskCompletionToggled = viewModel::onTaskCompletionToggled,
-        onPrioritySelected = viewModel::onPrioritySelected
+        onPrioritySelected = viewModel::onPrioritySelected,
+        onDeleteAllTasks = viewModel::onDeleteAllTasks
     )
    }

@@ -17,13 +17,15 @@ fun TaskScreen(
     onAddTask: () -> Unit,
     onFilterSelected: (String) -> Unit,
     onTaskCompletionToggled: (Task) -> Unit,
-    onPrioritySelected: (Priority) -> Unit
+    onPrioritySelected: (Priority) -> Unit,
+    onDeleteAllTasks: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TaskScreenTopBar(
                 totalTasks = uiState.tasks.size,
-                completedTasks = uiState.tasks.count { it.isCompleted }
+                completedTasks = uiState.tasks.count { it.isCompleted },
+                onDeleteAllTasks = onDeleteAllTasks
             )
         },
         containerColor = Color(0xFFF3F4F6)

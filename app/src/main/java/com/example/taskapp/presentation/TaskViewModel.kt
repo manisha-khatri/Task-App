@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.taskapp.domain.model.Task
 import com.example.taskapp.domain.usecase.AddTaskUseCase
+import com.example.taskapp.domain.usecase.DeleteAllTasksUseCase
 import com.example.taskapp.domain.usecase.GetTasksUseCase
 import com.example.taskapp.util.Priority
 import com.example.taskapp.util.TaskStatus
@@ -14,12 +15,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
     private val addTask: AddTaskUseCase,
-    private val getTasks: GetTasksUseCase
+    private val getTasks: GetTasksUseCase,
+    private val deleteAllTasks: DeleteAllTasksUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TaskUiState())
@@ -47,10 +54,14 @@ class TaskViewModel @Inject constructor(
     fun onAddTask() {
         if (_uiState.value.newTaskTitle.isNotBlank()) {
             viewModelScope.launch {
+
+                val calendar = Calendar.getInstance()
+                val formattedDate = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(calendar.time)
+
                 val newTask = Task(
-                    id = "",
+                    id = 0,
                     title = _uiState.value.newTaskTitle,
-                    date = "Just now", //TODO: fix date
+                    date = formattedDate, //TODO: fix date
                     status = TaskStatus.IN_PROGRESS,
                     priority = _uiState.value.selectedPriority,
                     isCompleted = false
@@ -72,7 +83,7 @@ class TaskViewModel @Inject constructor(
      * Handles the user toggling the completion status of a task.
      * NOTE: A real implementation would also call a 'UpdateTaskUseCase' here.
      */
-    fun onTaskCompletionToggled(task: Task) { //TODO: API call
+    fun onTaskCompletionToggled(task: Task) {
         viewModelScope.launch {
             _uiState.update {
                 it.copy(
@@ -93,5 +104,13 @@ class TaskViewModel @Inject constructor(
 
     fun onPrioritySelected(priority: Priority) {
         _uiState.update { it.copy(selectedPriority = priority) }
+    }
+
+    fun onDeleteAllTasks() {
+        viewModelScope.launch {
+            deleteAllTasks()
+            // The UI will automatically update because the `getTasks` flow will emit
+            // a new, empty list after the deletion.
+        }
     }
 }

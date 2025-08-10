@@ -4,7 +4,7 @@ import com.example.taskapp.util.Priority
 import com.example.taskapp.util.TaskStatus
 
 data class Task(
-    val id: String,
+    val id: Long = 0,
     val title: String,
     val date: String,
     val status: TaskStatus,

@@ -3,7 +3,7 @@ package com.example.taskapp.data.remote
 import com.example.taskapp.domain.model.Task
 
 fun TaskDto.toDomain(): Task = Task(
-    id = id.toString(),
+    id = id,
     title = title,
     date = date,
     status = status,
@@ -12,7 +12,7 @@ fun TaskDto.toDomain(): Task = Task(
 )
 
 fun Task.toDto(): TaskDto = TaskDto(
-    id = id.toInt(),
+    id = id,
     title = title,
     date = date,
     status = status,

@@ -16,6 +16,8 @@ class TaskRepositoryImpl @Inject constructor(
     val remote: RemoteDataSource
 ): TaskRepository {
 
+    private var isInitialFetchDone = false
+
     // add task in both local + remote
     override suspend fun addTask(task: Task) {
         withContext(Dispatchers.IO) {
@@ -35,11 +37,15 @@ class TaskRepositoryImpl @Inject constructor(
     override fun getTasks(): Flow<List<Task>> {
         return local.getCachedTasks()
             .onEach { cachedTasks ->
-                if (cachedTasks.isEmpty()) {
+                // Only fetch from the server if the cache is empty AND we haven't
+                // already performed the initial fetch.
+                if (cachedTasks.isEmpty() && !isInitialFetchDone) {
                     try {
                         val serverTasks = remote.getTasksFromServer()
                         serverTasks.collect { tasks ->
                             local.saveAllTasksOffline(tasks)
+                            // Set the flag to true after the initial fetch is successful
+                            isInitialFetchDone = true
                         }
                     } catch (e: Exception) {
                         println("Error fetching tasks from server: ${e.message}")
@@ -47,5 +53,11 @@ class TaskRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun deleteAllTasks() {
+        withContext(Dispatchers.IO) {
+            local.deleteAllTasks()
+        }
     }
 }
