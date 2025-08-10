@@ -7,10 +7,11 @@ It helps you stay organized by allowing you to add, filter, prioritize, and trac
   <img src="screenshots/taskflow_ui.png" alt="TaskFlow Screenshot" width="300"/>
 </p>
 
-![🎥 Watch TaskFlow Demo](screenshots/taskflow.gif)
-
-
-https://github.com/user-attachments/assets/04599dad-7410-407f-a836-cbb67b242b16
+<video src="https://github.com/user-attachments/assets/04599dad-7410-407f-a836-cbb67b242b16"
+       width="400"
+       controls>
+  Your browser does not support the video tag.
+</video>
 
 
 
@@ -54,6 +55,8 @@ https://github.com/user-attachments/assets/04599dad-7410-407f-a836-cbb67b242b16
 - **Hilt** – For Dependency Injection.
 
 ---
+![🎥 Watch TaskFlow Demo]
 
-## 📂 Project Structure
+https://github.com/user-attachments/assets/04599dad-7410-407f-a836-cbb67b242b16
+
 
