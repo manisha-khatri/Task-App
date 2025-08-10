@@ -11,13 +11,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
 
+@HiltViewModel
 class TaskViewModel @Inject constructor(
     private val addTask: AddTaskUseCase,
     private val getTasks: GetTasksUseCase
@@ -92,34 +92,3 @@ class TaskViewModel @Inject constructor(
         }
     }
 }
-
-
-/*
-    private val _taskUiState = MutableStateFlow<TaskUiState>(TaskUiState.Loading)
-    val taskUiState: StateFlow<TaskUiState> = _taskUiState
-
-    fun loadTasks() {
-        viewModelScope.launch {
-            getTask()
-                .onStart { _taskUiState.value = TaskUiState.Loading }
-                .catch { e -> _taskUiState.value = TaskUiState.Error(e.message.toString()) }
-                .collect { tasks ->
-                    if (tasks.isEmpty()) {
-                        _taskUiState.value = TaskUiState.Error("No tasks found") // or create Empty state
-                    } else {
-                        _taskUiState.value = TaskUiState.Success(tasks)
-                    }
-                }
-        }
-    }
-
-    fun addNewTask(task: Task) {
-        viewModelScope.launch {
-            try {
-                addTask(task)
-                // The UI will update automatically because loadTasks() is already collecting the Flow.
-            } catch (e: Exception) {
-                _taskUiState.value = TaskUiState.Error(e.message ?: "Failed to add task")
-            }
-        }
-    }*/

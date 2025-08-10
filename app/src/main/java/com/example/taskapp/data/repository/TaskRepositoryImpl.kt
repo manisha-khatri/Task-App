@@ -6,12 +6,9 @@ import com.example.taskapp.domain.model.Task
 import com.example.taskapp.domain.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
@@ -21,8 +18,14 @@ class TaskRepositoryImpl @Inject constructor(
 
     // add task in both local + remote
     override suspend fun addTask(task: Task) {
-        local.saveTaskOffline(task)
-        remote.saveTaskToServer(task)
+        withContext(Dispatchers.IO) {
+            local.saveTaskOffline(task)
+            /*try {
+                 remote.saveTaskToServer(task)
+             } catch (e: Exception) {
+                println("Error adding tasks in the server: ${e.message}")
+             }*/
+        }
     }
 
     /**
@@ -31,14 +34,16 @@ class TaskRepositoryImpl @Inject constructor(
      */
     override fun getTasks(): Flow<List<Task>> {
         return local.getCachedTasks()
-            .flatMapLatest { cachedTasks ->
-                if(cachedTasks.isNotEmpty()) {
-                    flowOf(cachedTasks)
-                } else {
-                    remote.getTasksFromServer()
-                        .onEach { serverTasks ->
-                            local.saveAllTasksOffline(serverTasks)
+            .onEach { cachedTasks ->
+                if (cachedTasks.isEmpty()) {
+                    try {
+                        val serverTasks = remote.getTasksFromServer()
+                        serverTasks.collect { tasks ->
+                            local.saveAllTasksOffline(tasks)
                         }
+                    } catch (e: Exception) {
+                        println("Error fetching tasks from server: ${e.message}")
+                    }
                 }
             }
             .flowOn(Dispatchers.IO)
