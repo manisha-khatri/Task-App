@@ -7,7 +7,7 @@ It helps you stay organized by allowing you to add, filter, prioritize, and trac
   <img src="screenshots/taskflow_ui.png" alt="TaskFlow Screenshot" width="300"/>
 </p>
 
-[🎥 Watch Demo](screenshots/video.webm)
+[🎥 Watch Demo](screenshots/taskflow.mov)
 
 ---
 
