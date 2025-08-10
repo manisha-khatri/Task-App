@@ -1,6 +1,7 @@
 package com.example.taskapp.presentation
 
 import com.example.taskapp.domain.model.Task
+import com.example.taskapp.util.Priority
 
 /**
  * Data class to hold all the UI state for the TaskScreen.
@@ -9,5 +10,6 @@ import com.example.taskapp.domain.model.Task
 data class TaskUiState(
     val tasks: List<Task> = emptyList(),
     val newTaskTitle: String = "",
-    val selectedFilter: String = "All Tasks"
+    val selectedFilter: String = "All Tasks",
+    val selectedPriority: Priority = Priority.MEDIUM
 )

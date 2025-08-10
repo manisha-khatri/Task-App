@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.taskapp.domain.model.Task
 import com.example.taskapp.presentation.TaskUiState
+import com.example.taskapp.util.Priority
 
 @Composable
 fun TaskScreen(
@@ -15,7 +16,8 @@ fun TaskScreen(
     onNewTaskTitleChange: (String) -> Unit,
     onAddTask: () -> Unit,
     onFilterSelected: (String) -> Unit,
-    onTaskCompletionToggled: (Task) -> Unit
+    onTaskCompletionToggled: (Task) -> Unit,
+    onPrioritySelected: (Priority) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -33,9 +35,11 @@ fun TaskScreen(
                 .fillMaxSize()
         ) {
             // "Add New Task" section
-            AddOrRemoveTaskSection(
+            AddTaskSection(
                 newTaskTitle = uiState.newTaskTitle,
                 onNewTaskTitleChange = onNewTaskTitleChange,
+                selectedPriority = uiState.selectedPriority,
+                onPrioritySelected = onPrioritySelected,
                 onAddTask = onAddTask
             )
             Spacer(Modifier.height(16.dp))

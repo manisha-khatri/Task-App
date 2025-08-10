@@ -1,17 +1,22 @@
 package com.example.taskapp.presentation.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -23,35 +28,42 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.taskapp.util.Priority
 
-
-// Composable for the "Add New Task" section
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddOrRemoveTaskSection(
+fun AddTaskSection(
     newTaskTitle: String,
     onNewTaskTitleChange: (String) -> Unit,
+    selectedPriority: Priority,
+    onPrioritySelected: (Priority) -> Unit,
     onAddTask: () -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
             Text("Add New Task", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(16.dp))
+
+            // New, cleaner layout: text field and dropdown in a single row.
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 OutlinedTextField(
                     value = newTaskTitle,
                     onValueChange = onNewTaskTitleChange,
                     placeholder = { Text("What needs to be done?") },
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(top = 8.dp),
                     shape = RoundedCornerShape(8.dp),
-                    // Updated call to use the new API
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = Color.White,
                         unfocusedContainerColor = Color.White,
@@ -60,19 +72,31 @@ fun AddOrRemoveTaskSection(
                         unfocusedBorderColor = Color(0xFFD1D5DB)
                     )
                 )
-                Spacer(Modifier.width(8.dp))
-                Button(
-                    onClick = onAddTask,
-                    modifier = Modifier.height(56.dp),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Add,
-                        contentDescription = "Add Task"
-                    )
-                    Spacer(Modifier.width(4.dp))
-                    Text("Add Task")
-                }
+                PriorityDropdown(
+                    selectedPriority = selectedPriority,
+                    onPrioritySelected = onPrioritySelected,
+                    // The dropdown now occupies a fixed space next to the text field
+                    modifier = Modifier.width(120.dp)
+                )
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            // The Add Task button now fills the entire width below the inputs
+            Button(
+                onClick = onAddTask,
+                modifier = Modifier.fillMaxWidth().height(56.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF3B82F6)
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Add Task"
+                )
+                Spacer(Modifier.width(4.dp))
+                Text("Add Task")
             }
         }
     }

@@ -19,11 +19,12 @@ import com.example.taskapp.presentation.TaskViewModel
        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
        // The composable is now stateless. It only receives the state and event handlers.
-       TaskScreen(
-           uiState = uiState,
-           onNewTaskTitleChange = viewModel::onNewTaskTitleChange,
-           onAddTask = viewModel::onAddTask,
-           onFilterSelected = viewModel::onFilterSelected,
-           onTaskCompletionToggled = viewModel::onTaskCompletionToggled
-       )
+    TaskScreen(
+        uiState = uiState,
+        onNewTaskTitleChange = viewModel::onNewTaskTitleChange,
+        onAddTask = viewModel::onAddTask,
+        onFilterSelected = viewModel::onFilterSelected,
+        onTaskCompletionToggled = viewModel::onTaskCompletionToggled,
+        onPrioritySelected = viewModel::onPrioritySelected
+    )
    }

@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -49,11 +48,11 @@ class TaskViewModel @Inject constructor(
         if (_uiState.value.newTaskTitle.isNotBlank()) {
             viewModelScope.launch {
                 val newTask = Task(
-                    id = UUID.randomUUID().toString(),
+                    id = "",
                     title = _uiState.value.newTaskTitle,
-                    date = "Just now",
+                    date = "Just now", //TODO: fix date
                     status = TaskStatus.IN_PROGRESS,
-                    priority = Priority.MEDIUM,
+                    priority = _uiState.value.selectedPriority,
                     isCompleted = false
                 )
                 addTask(newTask)
@@ -90,5 +89,9 @@ class TaskViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun onPrioritySelected(priority: Priority) {
+        _uiState.update { it.copy(selectedPriority = priority) }
     }
 }

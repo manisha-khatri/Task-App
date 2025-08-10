@@ -12,7 +12,6 @@ fun TaskEntity.toDomain(): Task = Task(
 )
 
 fun Task.toEntity(): TaskEntity = TaskEntity(
-    id = id.toInt(),
     title = title,
     date = date,
     status = status,
